@@ -1,6 +1,7 @@
 # Security audit
 
 [Scenario](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/security_audit_scenario.md)
+
 [Report](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/security_audit_report.md)
 
 ## Controls and compliance checklist
