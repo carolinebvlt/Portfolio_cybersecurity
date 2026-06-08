@@ -1,5 +1,8 @@
 # Security audit
 
+[Scenario](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/security_audit_scenario.md)
+[Report](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/security_audit_report.md)
+
 ## Controls and compliance checklist
 To complete the controls assessment checklist, refer to the information provided in the scope, goals, and risk assessment report. For more details about each control, including the type and purpose, refer to the control categories document.
 
