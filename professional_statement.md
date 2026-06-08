@@ -1,4 +1,4 @@
-# Déclaration professionnelle
+# Professional Statement
 
 ## My strenghts
 My strengths are programming logic (previous job: backend developer) and my ability to learn quickly
