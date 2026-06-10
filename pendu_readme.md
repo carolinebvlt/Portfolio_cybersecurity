@@ -12,7 +12,7 @@
 - Si le joueur atteint les 7 tentatives ratées, il a perdu
 
 ## Compétences Python
-Utilisation de `input()`
-Manipulation de `list` et de `str`
-Utilisation de conditions `if`, `else`
-Boucles `while` et `for`
+- Utilisation de `input()`
+- Manipulation de `list` et de `str`
+- Utilisation de conditions `if`, `else`
+- Boucles `while` et `for`
