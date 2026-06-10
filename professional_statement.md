@@ -1,6 +1,6 @@
 # Professional Statement
 
-## My strenghts
+## My strengths
 My strengths are programming logic (previous job: backend developer) and my ability to learn quickly
 
 ## My values
