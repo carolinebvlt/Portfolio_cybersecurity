@@ -1,8 +1,8 @@
 # Security audit
 
-[Scenario](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/security_audit_scenario.md)
+[Scenario](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/security_audit/security_audit_scenario.md)
 
-[Report](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/security_audit_report.md)
+[Report](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/security_audit/security_audit_report.md)
 
 (First attempt after 1 week of cybersecurity training)
 
