@@ -1,6 +1,6 @@
 # Création d'un jeu du pendu
 
-[Code du jeu]()
+[Code du jeu](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/pendu.py)
 
 ## Algorithme 
 - l'ordinateur choisi un mot parmi une liste (fichier séparé), et indique à l'utilisateur le nombre de caractères
