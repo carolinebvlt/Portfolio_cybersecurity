@@ -8,15 +8,15 @@ Here are the main command lines for managing permissions for files and folders i
 ## Describe the permissions string
 `drwxrwxrwx` 
 It starts with a `d` for a directory and with `-` for a file.
-First three letters are permissions of the user
-Next three letters are permissions for the group
-Last three letters are permissions for the others
+First three letters are permissions of the user.
+Next three letters are permissions for the group.
+Last three letters are permissions for the others.
 `r` : read
 `w` : write
 `x` : execute
 ## Change file permissions
-`chmod g+w,u-r file.txt`
-This command line would add writing permission for the group and remove reading permission for the others
+`chmod g+w,o-r file.txt`
+This command line would add writing permission for the group and remove reading permission for the others.
 
 ## Change directory permissions
 `chmod g+x directory/`
