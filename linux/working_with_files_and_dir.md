@@ -1,0 +1,17 @@
+# Working with files and directories
+- `pwd` : working directory 
+- `ls`: list of files and directory
+- `cd` : move to another directory
+- `cat` : diplay the content of a file
+- `head` : display first 10 lines of a file
+- `tail` : display the end lines of a file
+- `less` : display file's pages one by one
+- `grep` : search for a string in files `grep txtToFind file.txt`
+- `|` : use the output of a command line as an input for the next one `ls /home/ | grep txtToFind`
+- `find` search in files and directories names `-name`= CS, `iname` = NCS `find /home/projects -name "*log*"` 
+- `mkdir` create a directory
+- `rmdir` remove a directory
+- `touch` create a file
+- `rm` remove a file
+- `mv` move a file
+- `cp` copy a file
