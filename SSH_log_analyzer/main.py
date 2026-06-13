@@ -18,7 +18,7 @@ list_dict_logs = []
 
 for log in logs :
 
-    # Foreach log, create a dictionnary with :
+    # For each log, create a dictionnary with :
     # timestamp, host, service, event, user, IP, port (client), protocol
 
     # find the timestamp, user, and IP with regex
@@ -53,17 +53,22 @@ for log in logs :
 # Now, only working with the list of dictionnaries list_dict_logs
 
 # Count failed and accepted password
+# Init some lists needed for further analyze
 accepted_password = 0
 failed_password = 0
 failed_logs = []
 ip_addresses_failed_password = []
+ip_addresses_accepted_password = []
 hosts_failed_password = []
 users_failed_password = []
 protocols_failed_password = []
 dict_ip_timestamps = {}
 
+# For each log
 for log_dict in list_dict_logs :
     event = log_dict.get("event")
+    # if the event is "Failed password" :
+    # add it to lists to count later and find suspicious behavior
     if event == "Failed password":
         failed_password += 1
         failed_logs.append(log_dict)
@@ -72,13 +77,16 @@ for log_dict in list_dict_logs :
         users_failed_password.append(log_dict.get("user"))
         protocols_failed_password.append(log_dict.get("protocol"))
 
-        #create new dictionnary with ip as keys and list of timestamps as value
+        # create new dictionnary with ip as keys and list of timestamps as value
+        # to calculate the duration bewteen first and last attempt of each IP address
         if log_dict.get("ip") not in dict_ip_timestamps :
             dict_ip_timestamps[log_dict.get("ip")] = []
         dict_ip_timestamps[log_dict.get("ip")].append(log_dict.get("timestamp"))
 
     elif event == "Accepted password":
         accepted_password += 1
+        # add to the list ip_addresses_accepted_password to check later if a suspicious IP succeeded to login
+        ip_addresses_accepted_password.append(log_dict.get("ip"))
 
 # use Counter to find the most used IP, user, host, protocol
 count_ip_addresses = Counter(ip_addresses_failed_password)  
@@ -115,23 +123,31 @@ print(f"The last failed occured at {failed_logs[-1]['timestamp']}.")
 first_dt = datetime.strptime("2026 " + failed_logs[0]['timestamp'], "%Y %b %d %H:%M:%S")
 last_dt = datetime.strptime("2026 " + failed_logs[-1]['timestamp'], "%Y %b %d %H:%M:%S")
 
-# display the difference between the two datetime objects
+# display the difference between the two timestamps
 duration = int(last_dt.timestamp()) - int(first_dt.timestamp())
 print(f"{total_failed_attempts} failed attempts occured in (time) : {duration} seconds, or {duration/60} minutes")
 
 # STEP 4 : ANALYZING / ALERT -------------------------------------------------
 print("--------------------------------")
-# ALERT if more than 10 failed attemps for ips and users
+
+# ALERT if more than 10 failed attempts for ips and users
 for ip, count in count_ip_addresses.most_common() :
-    if count >= 10:
+    if count >= 5:
         print(f"ALERT : suspicious activity. {count} failed attempts for the IP {ip}")
         print(f"First attempt at : {dict_ip_timestamps.get(ip)[0]}")
         print(f"Last attempt at : {dict_ip_timestamps.get(ip)[-1]}")
-        # convert to calculate the diff bewteen the two timestamps
+        
+        # convert to calculate the diff bewteen the two timestamps (first and last attempt)
         first_dt = datetime.strptime("2026 " + dict_ip_timestamps.get(ip)[0], "%Y %b %d %H:%M:%S")
         last_dt = datetime.strptime("2026 " + dict_ip_timestamps.get(ip)[-1], "%Y %b %d %H:%M:%S")
         duration = int(last_dt.timestamp()) - int(first_dt.timestamp())
         print(f"Duration between first and last attempt : {duration} seconds, or {duration/60} minutes")
+
+        # check if the ip succeeded login
+        if ip in ip_addresses_accepted_password :
+            print(f"ALERT !!! The suspicious IP {ip} succeeded login")
+        else :
+            print(f"The suspicious IP {ip} didn't succeeded login")
 
 for user, count in count_users.most_common():
     if count >= 10:
