@@ -61,8 +61,10 @@ ip_addresses_failed_password = []
 ip_addresses_accepted_password = []
 hosts_failed_password = []
 users_failed_password = []
+users_accepted_password = []
 protocols_failed_password = []
 dict_ip_timestamps = {}
+dict_user_ips = {}
 
 # For each log
 for log_dict in list_dict_logs :
@@ -87,6 +89,12 @@ for log_dict in list_dict_logs :
         accepted_password += 1
         # add to the list ip_addresses_accepted_password to check later if a suspicious IP succeeded to login
         ip_addresses_accepted_password.append(log_dict.get("ip"))
+        users_accepted_password.append(log_dict.get("user"))
+        # add a dictionnary with user as keys and list of ips as value
+        # to detect possibly compromised account lather
+        if log_dict.get("user") not in dict_user_ips :
+            dict_user_ips[log_dict.get("user")] = []
+        dict_user_ips[log_dict.get("user")].append(log_dict.get("ip"))
 
 # use Counter to find the most used IP, user, host, protocol
 count_ip_addresses = Counter(ip_addresses_failed_password)  
@@ -150,6 +158,11 @@ for ip, count in count_ip_addresses.most_common() :
             print(f"The suspicious IP {ip} didn't succeeded login")
 
 for user, count in count_users.most_common():
-    if count >= 10:
+    if count >= 5:
         print(f"ALERT : suspicious activity. {count} failed attempts for the user {user}")
-
+        # check if it succeeded login and display the associated IP address
+        if user in users_accepted_password :
+            print(f"ALERT : the user {user} succeeded login : ")
+            print(dict_user_ips[user])
+            
+        
