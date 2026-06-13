@@ -1,4 +1,4 @@
-# Report : SSH logs alaysis
+# Report : SSH logs analysis
 Analysis of the SSH log file revealed several security alerts.
 
 A total of 59 failed login attempts occurred over a period of approximately 57 minutes, an average rate of about one attempt per minute.
