@@ -13,4 +13,4 @@ The program will be able to do several things :
 
 ## Report 
 
-[My report]()
+[My report](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/SSH_log_analyzer/Report.md)
