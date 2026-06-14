@@ -1,4 +1,5 @@
 import os
+import json
 from scanner import scanner
 from hasher import hasher
 from storage import storage
@@ -24,9 +25,21 @@ for file_to_analyze in list_of_files :
 
 
 if os.path.exists(path):
-    print(f'yes')
     # check if the content of the baseline is the same than file_hashes
+    with open(path, 'r') as file:
+        baseline = json.load(file)
+    if baseline == file_hashes :
+        #if the content is the same, store the new baseline
+        print("same hash")
+        storage(file_hashes,dir_to_analyze)
+    else :
+        print("different hash")
+        #find what has been modified
+        for file_to_check, hash in file_hashes.items():
+            if baseline[file_to_check] != hash :
+                print(f"This file has been modified : {file_to_check}")
+        # store new baseline
+        storage(file_hashes,dir_to_analyze)
 
 else :
-    print(f"no : {path}")
     storage(file_hashes, dir_to_analyze)
