@@ -1,4 +1,5 @@
 ### File integrity Report ###
 
 Analyzed directory : SSH_log_analyzer
-Perfect match with the baseline.
+The directory has been modified.
+This file has been added : SSH_log_analyzer\test
