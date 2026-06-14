@@ -132,8 +132,8 @@ first_dt = datetime.strptime("2026 " + failed_logs[0]['timestamp'], "%Y %b %d %H
 last_dt = datetime.strptime("2026 " + failed_logs[-1]['timestamp'], "%Y %b %d %H:%M:%S")
 
 # display the difference between the two timestamps
-duration = int(last_dt.timestamp()) - int(first_dt.timestamp())
-print(f"{total_failed_attempts} failed attempts occured in (time) : {duration} seconds, or {duration/60} minutes")
+total_duration = int(last_dt.timestamp()) - int(first_dt.timestamp())
+print(f"{total_failed_attempts} failed attempts occured in (time) : {total_duration} seconds, or {total_duration/60} minutes")
 
 # STEP 4 : ANALYZING / ALERT -------------------------------------------------
 print("--------------------------------")
@@ -165,4 +165,41 @@ for user, count in count_users.most_common():
             print(f"ALERT : the user {user} succeeded login : ")
             print(dict_user_ips[user])
             
-        
+# STEP 5 : GENERATE REPORT.TXT
+
+report = ""
+report += "#######################\n"
+report += "# SSH security report #\n"
+report += "#######################\n\n"
+
+report += "SUMMARY\n\n"
+report += f"Analyzed logs : {accepted_password + failed_password}\n"
+report += f"Failed login attempts : {failed_password}\n"
+report += f"Duration between first and last failed attempt : {total_duration} seconds or {total_duration/60} minutes.\n"
+
+report += "\nDETAILS\n\n"
+report += "Suspicious IP addresses : \n\n"
+for ip, count in count_ip_addresses.most_common() :
+    report += f"{ip} : {count} failed attempts.\n\n"
+    report += f"First attempt at : {dict_ip_timestamps.get(ip)[0]}\n"
+    report += f"Last attempt at : {dict_ip_timestamps.get(ip)[-1]}\n"
+    first_dt = datetime.strptime("2026 " + dict_ip_timestamps.get(ip)[0], "%Y %b %d %H:%M:%S")
+    last_dt = datetime.strptime("2026 " + dict_ip_timestamps.get(ip)[-1], "%Y %b %d %H:%M:%S")
+    duration = int(last_dt.timestamp()) - int(first_dt.timestamp())
+    report += f"Duration between first and last attempt : {duration} seconds, or {duration/60} minutes\n"
+    if ip in ip_addresses_accepted_password :
+        report += f"ALERT !!! The suspicious IP {ip} succeeded login\n\n"
+    else :
+        report += f"The suspicious IP {ip} didn't succeeded login\n\n"
+
+report += "Targeted accounts : \n\n"
+for user, count in count_users.most_common():
+    report += f"{user} : {count} failed attempts.\n"
+
+print(report)    
+report_name = f"ssh_report_{datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}.txt"
+report_path = os.path.join(base_dir, report_name)
+with open(report_path, "w") as file :
+    file.write(report)
+
+

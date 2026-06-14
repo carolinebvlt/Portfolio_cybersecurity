@@ -10,6 +10,7 @@ The program will be able to do several things :
 - counting different occurences with `Counter`
 - display a report
 - analyze and display some alerts in case of suspicious behavior
+- generate a report.txt
 
 ## Report 
 
