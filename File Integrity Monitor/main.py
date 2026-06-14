@@ -8,6 +8,9 @@ from storage import storage
 # Select a directory to analyze  
 dir_to_analyze = "SSH_log_analyzer"
 
+# Init the report with a list that will trasnform with join later
+report_lines = []
+
 # Check if there is a baseline file for that directory
 json_name = f"baseline_{dir_to_analyze}.json"
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -34,10 +37,17 @@ if os.path.exists(path):
         storage(file_hashes,dir_to_analyze)
     else :
         print("different hash")
-        #find what has been modified
+       
+        #find what has been modified, added or removed
         for file_to_check, hash in file_hashes.items():
-            if baseline[file_to_check] != hash :
+            if baseline.get(file_to_check) == None :
+                print(f"This file has been added : {file_to_check}")
+            elif baseline.get(file_to_check) != hash :
                 print(f"This file has been modified : {file_to_check}")
+            
+        for file, hash in baseline.items():
+            if file_hashes.get(file) == None :
+                print(f"This file has been removed : {file}")
         # store new baseline
         storage(file_hashes,dir_to_analyze)
 
