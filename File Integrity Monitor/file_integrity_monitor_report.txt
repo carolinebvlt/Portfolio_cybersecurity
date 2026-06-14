@@ -2,4 +2,4 @@
 
 Analyzed directory : SSH_log_analyzer
 The directory has been modified.
-This file has been added : SSH_log_analyzer\test
+This file has been removed : SSH_log_analyzer\test
