@@ -14,4 +14,6 @@ The program will be able to do several things :
 
 ## Report 
 
+[Generated report](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/SSH_log_analyzer/ssh_report_2026_06_14_13_47_59.txt)
+
 [My report](https://github.com/carolinebvlt/Portfolio_cybersecurity/blob/main/SSH_log_analyzer/Report.md)
