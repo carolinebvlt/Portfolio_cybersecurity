@@ -29,6 +29,10 @@ for file_to_analyze in list_of_files :
     file_hash = hasher(file_to_analyze)
     file_hashes[file_to_analyze] = file_hash
 
+# Init some list for the report
+modified_files = []
+removed_files = []
+added_files = []
 
 if os.path.exists(path):
     # check if the content of the baseline is the same than file_hashes
@@ -44,13 +48,23 @@ if os.path.exists(path):
         # find what has been modified, added or removed
         for file_to_check, hash in file_hashes.items():
             if baseline.get(file_to_check) == None :
-                report_lines.append(f"This file has been added : {file_to_check}")
+                added_files.append(file_to_check)
             elif baseline.get(file_to_check) != hash :
-                report_lines.append(f"This file has been modified : {file_to_check}")
+                modified_files.append(file_to_check)
             
         for file, hash in baseline.items():
             if file_hashes.get(file) == None :
-                report_lines.append(f"This file has been removed : {file}")
+                removed_files.append(file)
+                
+        
+        # loop on each list for the report :
+        report_lines.append(f"Modified files : {len(modified_files)}")
+        for file in modified_files :
+            report_lines.append(f"- {file}")
+        report_lines.append(f"Added files : {len(added_files)}")
+        for file in added_files :
+            report_lines.append(f"")
+
         # store new baseline
         storage(file_hashes,dir_to_analyze)
     
