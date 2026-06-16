@@ -15,8 +15,8 @@ def report(ip_address, open_ports, duration_seconds) :
 
     report_lines.append(f"Report date : {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n")
 
-    report_lines.append(f"Scan duration : {duration_seconds} s.")
-    report_lines.append(f"Scan duration :{duration_seconds/60} min.\n")
+    report_lines.append(f"Scan duration : {round(duration_seconds, 2)} s.")
+    report_lines.append(f"Scan duration :{round(duration_seconds/60, 2)} min.\n")
 
     # Open json with common ports and services
     base_dir = os.path.dirname(os.path.abspath(__file__))
