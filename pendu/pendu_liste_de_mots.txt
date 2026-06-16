@@ -1,7 +1,0 @@
-pomme
-banane
-framboise
-orange
-cerise
-raisin
-abricot
