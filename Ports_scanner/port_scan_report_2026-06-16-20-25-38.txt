@@ -1,0 +1,16 @@
+##############################
+###### PORT SCAN REPORT ######
+##############################
+
+Analyzed IP address : 192.168.129.2
+
+Report date : 2026-06-16 20:25:38
+
+Scan duration : 214.458006 s.
+Scan duration :3.5743001000000003 min.
+
+Open ports : 
+
+135 : RPC
+139 : NetBIOS
+445 : SMB

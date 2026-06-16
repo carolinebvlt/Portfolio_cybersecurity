@@ -15,4 +15,4 @@ print(f"Duration of the scan : {duration_seconds} s.")
 print(f"Duration in minutes : {duration_seconds / 60} min.")
 
 # write the report
-report(open_ports, duration_scan)
+report(ip_address, open_ports, duration_seconds)

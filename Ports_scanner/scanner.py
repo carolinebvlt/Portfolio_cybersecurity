@@ -13,7 +13,7 @@ def scanner(ip_address):
     # For loop to scan from port 1 to 1024 included
     # Only 100 to 200 for tests
 
-    for port in range(100, 200) :
+    for port in range(1, 1025) :
         
         # Create a socket with a timeout and try to connect
         my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
