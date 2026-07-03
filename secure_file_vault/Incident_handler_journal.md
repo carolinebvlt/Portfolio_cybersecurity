@@ -20,3 +20,6 @@ The problem was detected when the message appeared on a screen. The existing too
 - When : Tuesday, July 2, 2026 at 9 AM
 - Where : On an employee's computer within the company network
 - Why : The employee was tricked by a phishing attempt (social engineering).
+#### Additional note
+Need to see the compromised email and analyze it.
+Lack of education ? 
